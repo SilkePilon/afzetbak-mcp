@@ -9,7 +9,7 @@ async function startServer() {
     // Create a new FastMCP server instance
     const server = new FastMCP({
       name: "MCP Server",
-      version: "1.0.0"
+      version: "1.0.1"
     });
 
     // Register all resources, tools, and prompts
@@ -29,4 +29,4 @@ async function startServer() {
 }
 
 // Export the server creation function
-export default startServer; 
+export default startServer;

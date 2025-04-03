@@ -2,9 +2,13 @@ name: NPM Publish
 
 on:
   push:
-    branches: [ main ]
-    paths:
-      - 'package.json'
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
 
 jobs:
   check-version:
@@ -14,6 +18,9 @@ jobs:
       version: ${{ steps.check.outputs.version }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Check version changes
         id: check
         uses: EndBug/version-check@v2
@@ -42,7 +49,7 @@ jobs:
 
   publish:
     needs: [check-version, build]
-    if: needs.check-version.outputs.should_publish == 'true'
+    if: needs.check-version.outputs.should_publish == 'true' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -60,7 +67,7 @@ jobs:
         run: npm run build
 
       - name: Publish
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

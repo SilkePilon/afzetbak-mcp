@@ -2,7 +2,7 @@
   "name": "@afzetbak/mcp-server",
   "module": "src/index.ts",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "MCP Server for afzetbak.nl - Real-time container/dumpster information and availability service",
   "publishConfig": {
     "access": "public"
